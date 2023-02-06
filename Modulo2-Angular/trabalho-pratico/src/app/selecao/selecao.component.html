@@ -1,0 +1,28 @@
+<div class="card" style="width: 100%">
+  <div class="card-header">
+    <h3>{{ titulo }}</h3>
+    <span *ngIf="escolhaAte > 1"
+      >Escolha até {{ escolhaAte }}
+      <span *ngIf="n > 0">{{
+        n === 1 ? "(" + n + " Selecionado)" : "(" + n + " Selecionados)"
+      }}</span></span
+    >
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let opcao of opcoes; let i = index">
+      <input
+        *ngIf="escolhaAte === 1"
+        name="{{ nameRadio }}"
+        type="radio"
+        [disabled]="n >= escolhaAte"
+      /><input
+        *ngIf="escolhaAte > 1"
+        type="checkbox"
+        #escolha
+        [disabled]="desabilitarNaoSelecionados(escolha.checked)"
+        (change)="addRemoveOpcao($event)"
+      />
+      {{ opcao }}
+    </li>
+  </ul>
+</div>
